@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/mvc
+                            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--开启包扫描-->
+    <context:component-scan base-package="com.itheima">
+        <!--配置扫描过滤-->
+        <!--include-filter：只扫描-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"></property> <!--文件所在的目录-->
+        <property name="suffix" value=".jsp"></property> <!--文件的后缀名是什么-->
+    </bean>
+
+
+    <!--开启springMVCFramework注解的支持-->
+    <!--此标签会让处理器映射器、处理器适配器、处理器生效-->
+    <mvc:annotation-driven/>
+
+
+    <!--配置哪些静态资源不拦截-->
+    <!--mapping：表示此请求路径不拦截-->
+    <!--location：表示js下的任何文件不拦截-->
+    <!--注意：因为所有的请求都会走DispatcherServlet对象，默认会拦截静态资源，所以要配置过滤静态资源，要告诉DispatcherServlet哪些静态资源不需要拦截。-->
+    <mvc:resources location="/css/" mapping="/css/**"/> <!-- 样式 -->
+    <mvc:resources location="/images/" mapping="/images/**"/> <!-- 图片 -->
+    <mvc:resources location="/js/" mapping="/js/**"/> <!-- javascript -->
+
+
+</beans>
