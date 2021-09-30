@@ -26,6 +26,7 @@
 
     <dependencies>
         <!-- spring -->
+        <!--AOP相关-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
